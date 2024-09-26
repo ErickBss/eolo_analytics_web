@@ -3,29 +3,42 @@ import {
 	Droplet,
 	Droplets,
 	LucideIcon,
-	MapPin,
 	Thermometer,
+	ThermometerSun,
 	Wind,
 } from 'lucide-react';
 
-export function WeatherResult() {
-	return (
-		<div>
-			<div className="flex items-center">
-				<MapPin size={40} className="mr-2" />
-				<p className="text-zinc-600 font-medium text-lg">
-					Pinheiros - São Paulo
-				</p>
-			</div>
+type WeatherResultProps = {
+	humidity: number;
+	real_feal: number;
+	temperature: number;
+	wind_direction: string;
+	wind_speed: number;
+};
 
-			<div className="border rounded-xl p-4 mt-5 grid grid-cols-2 gap-5">
-				<Item Icon={Thermometer} label="Temperatura" value="16 C" />
-				<Item Icon={Thermometer} label="Sesação térmica" value="16 C" />
-				<Item Icon={Droplet} label="Preciptação" value="80mm" />
-				<Item Icon={Droplets} label="Umidade" value="54%" />
-				<Item Icon={CloudOff} label="Dias sem chuva" value="10" />
-				<Item Icon={Wind} label="Velocidade/dir. do vento" value="N 10 km/h" />
-			</div>
+export function WeatherResult({
+	humidity,
+	real_feal,
+	temperature,
+	wind_direction,
+	wind_speed,
+}: WeatherResultProps) {
+	return (
+		<div className="border rounded-xl p-4  grid grid-cols-2 gap-5">
+			<Item Icon={Thermometer} label="Temperatura" value={`${temperature} C`} />
+			<Item
+				Icon={ThermometerSun}
+				label="Sesação térmica"
+				value={`${real_feal} C`}
+			/>
+			<Item Icon={Droplet} label="Preciptação" value="80mm" />
+			<Item Icon={Droplets} label="Umidade" value={`${humidity}%`} />
+			<Item Icon={CloudOff} label="Dias sem chuva" value="10" />
+			<Item
+				Icon={Wind}
+				label="Velocidade/dir. do vento"
+				value={`${wind_direction} ${wind_speed} km/h`}
+			/>
 		</div>
 	);
 }

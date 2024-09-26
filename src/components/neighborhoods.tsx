@@ -109,7 +109,13 @@ const neighborhoods = [
 	{ value: 'vila_mariana', label: 'Vila Mariana' },
 ];
 
-export function NeighborhoodSelect() {
+export function NeighborhoodSelect({
+	setNeighborhood,
+}: {
+	setNeighborhood: React.Dispatch<
+		React.SetStateAction<{ label: string; value: string } | undefined>
+	>;
+}) {
 	const [open, setOpen] = React.useState(false);
 	const [value, setValue] = React.useState('');
 
@@ -141,6 +147,7 @@ export function NeighborhoodSelect() {
 									value={neighborhood.value}
 									onSelect={(currentValue) => {
 										setValue(currentValue === value ? '' : currentValue);
+										setNeighborhood(neighborhood);
 										setOpen(false);
 									}}
 								>
